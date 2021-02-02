@@ -1,0 +1,33 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oauth2_test
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+
+
+#logging:
+#  level: debug
+
+server.port: 8082
+
+#security:
+#  oauth2:
+#    resource:
+#      filter-order: 3
+
+
+
+
+
