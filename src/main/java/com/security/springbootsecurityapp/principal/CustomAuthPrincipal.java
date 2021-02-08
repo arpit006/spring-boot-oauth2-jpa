@@ -1,6 +1,7 @@
 package com.security.springbootsecurityapp.principal;
 
 import com.security.springbootsecurityapp.entity.User;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 /**
  * @author Arpit Srivastava <a> mailTo: iarpitsrivastava06@gmail.com</a>
  */
+@ToString
 public class CustomAuthPrincipal extends User implements UserDetails {
 
     private String username;
