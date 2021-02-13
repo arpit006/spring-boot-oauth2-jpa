@@ -33,7 +33,7 @@ public class CustomResourceServerConfigurerAdapter extends ResourceServerConfigu
                 .antMatchers("/get/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterAfter(customFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterAfter(customFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout().clearAuthentication(true).logoutUrl("/user/logout");
     }
 }

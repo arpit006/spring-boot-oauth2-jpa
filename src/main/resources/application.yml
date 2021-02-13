@@ -27,7 +27,9 @@ server.port: 8082
 #    resource:
 #      filter-order: 3
 
-
+oauth:
+  server: http://localhost:8082
+  url: /oauth/token
 
 
 

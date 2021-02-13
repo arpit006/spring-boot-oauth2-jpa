@@ -45,7 +45,7 @@ public class CustomAuthorizationServerConfigurerAdapter extends AuthorizationSer
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
 //        security.passwordEncoder(passwordEncoder);
     }
 

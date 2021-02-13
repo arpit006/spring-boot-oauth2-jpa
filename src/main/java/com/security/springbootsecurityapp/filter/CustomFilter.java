@@ -19,13 +19,17 @@ import java.io.IOException;
 @Component
 public class CustomFilter extends OncePerRequestFilter {
 
-    @Override
+//    @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         //intercept http requests and set something at global level
         String username = httpServletRequest.getHeader("x-username");
+//        if (username == null || username.isEmpty()) {
+//            throw new RuntimeException("Username mandatory in header");
+//        }
+
         CustomSecurityObjects.setUsername(username);
-        CustomAuthPrincipal loggedInUSer = SecurityContextUtil.getLoggedInUSer();
-        CustomSecurityObjects.setMobileNo(loggedInUSer.getPhoneNo());
+//        CustomAuthPrincipal loggedInUSer = SecurityContextUtil.getLoggedInUSer();
+//        CustomSecurityObjects.setMobileNo(loggedInUSer.getPhoneNo());
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
