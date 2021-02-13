@@ -1,5 +1,6 @@
 package com.security.springbootsecurityapp.config;
 
+import com.security.springbootsecurityapp.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -38,14 +40,18 @@ public class CustomAuthorizationServerConfigurerAdapter extends AuthorizationSer
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
     @Bean
     public TokenStore jdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
     }
 
+    //to give all the accesses and role associated with that token
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
 //        security.passwordEncoder(passwordEncoder);
     }
 
@@ -58,6 +64,7 @@ public class CustomAuthorizationServerConfigurerAdapter extends AuthorizationSer
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(jdbcTokenStore());
         endpoints.authenticationManager(authenticationManager);
+        endpoints.userDetailsService(customUserDetailsService);
     }
 
     @Bean

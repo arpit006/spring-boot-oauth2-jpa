@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -23,6 +24,11 @@ public class CustomResourceServerConfigurerAdapter extends ResourceServerConfigu
     private CustomFilter customFilter;
 
     @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.resourceId("RESOURCE_ID").stateless(true);
+    }
+
+    @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -33,7 +39,7 @@ public class CustomResourceServerConfigurerAdapter extends ResourceServerConfigu
                 .antMatchers("/get/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterAfter(customFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterAfter(customFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout().clearAuthentication(true).logoutUrl("/user/logout");
     }
 }

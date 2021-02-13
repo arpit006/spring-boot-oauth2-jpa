@@ -17,16 +17,16 @@ import java.io.IOException;
  * @author Arpit Srivastava <a> mailTo: iarpitsrivastava06@gmail.com</a>
  */
 @Component
-public class CustomFilter extends OncePerRequestFilter {
+public class CustomFilter /*extends OncePerRequestFilter */{
 
-    @Override
+//    @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         //intercept http requests and set something at global level
         String username = httpServletRequest.getHeader("x-username");
         CustomSecurityObjects.setUsername(username);
-        CustomAuthPrincipal loggedInUSer = SecurityContextUtil.getLoggedInUSer();
-        CustomSecurityObjects.setMobileNo(loggedInUSer.getPhoneNo());
+//        CustomAuthPrincipal loggedInUSer = SecurityContextUtil.getLoggedInUSer();
+//        CustomSecurityObjects.setMobileNo(loggedInUSer.getPhoneNo());
 
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+//        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

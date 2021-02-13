@@ -34,9 +34,15 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+//    @Autowired
+//    private CustomOAuth2AuthenticationProvider customOAuth2AuthenticationProvider;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
+        auth
+//                .authenticationProvider(customOAuth2AuthenticationProvider)
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Bean("authenticationManager")

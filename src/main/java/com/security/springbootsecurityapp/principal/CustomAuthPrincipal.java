@@ -1,6 +1,8 @@
 package com.security.springbootsecurityapp.principal;
 
 import com.security.springbootsecurityapp.entity.User;
+import com.security.springbootsecurityapp.vo.LoginVo;
+import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
  * @author Arpit Srivastava <a> mailTo: iarpitsrivastava06@gmail.com</a>
  */
 @ToString
+@Data
 public class CustomAuthPrincipal extends User implements UserDetails {
 
     private String username;
@@ -24,7 +27,37 @@ public class CustomAuthPrincipal extends User implements UserDetails {
 
     private String phoneNo;
 
+//    private String client;
+//
+//    private String clientSecret;
+//
+//    private String grantType;
+
     private List<? extends GrantedAuthority> authorities;
+
+    /*public String getGrantType() {
+        return grantType;
+    }
+
+    public void setGrantType(String grantType) {
+        this.grantType = grantType;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }*/
 
     public static CustomAuthPrincipal mapUserToPrincipal(User user) {
         CustomAuthPrincipal customAuthPrincipal = new CustomAuthPrincipal();
